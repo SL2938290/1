@@ -80,7 +80,7 @@
                     <button id="cancel-edit-btn" onclick="cancelEdit()" class="hidden" style="background: #78909c; width: 100%; margin-top: 5px; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">取消编辑</button>
                     
                     <div class="export-box">
-                        <p style="margin:0 0 5px 0; color:#e65100; font-weight:bold;">📲 提取最新题目数据数据（锁死到手机用）：</p>
+                        <p style="margin:0 0 5px 0; color:#e65100; font-weight:bold;">📲 提取最新题目数据（锁死到手机用）：</p>
                         <button onclick="exportMyData()" style="background:#ff9800; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-weight:bold;">点击一键复制我写好的题</button>
                     </div>
                     
@@ -100,17 +100,14 @@
     <script>
         const DATA_KEY = 'universe_science_quiz_data_ultimate';
 
-        // 🌟 核心数据载体：在这里，你的最新题目已经被死死固化到网站的最底层逻辑里了！
-        /*START_DATA*/ 
-        const HARDCODED_DATA = [{"category":"q","type":"select","question":"作为这个网址至高无上玉树临风的创始人，我的智商是多少？满分一百","options":["A 100","B 100，"],"correctOpt":"A","answer":"我真的太帅了哈哈哈哈哈哈","id":"id_178101100233174"}]; 
-        /*END_DATA*/
+        // 🌟 初始默认种子题目
+        const initData = [{"category":"q","type":"select","question":"作为这个网址至高无上玉树临风的创始人，我的智商是多少？满分一百","options":["A 100","B 100，"],"correctOpt":"A","answer":"我真的太帅了哈哈哈哈哈哈","id":"id_178101100233174"}];
 
-        let studyData;
-        if (HARDCODED_DATA && HARDCODED_DATA.length > 0) {
-            studyData = HARDCODED_DATA;
+        // 🧠 修复后的核心数据逻辑：如果本地已经有出的新题，绝对优先读取本地，绝不覆盖！
+        let studyData = JSON.parse(localStorage.getItem(DATA_KEY));
+        if (!studyData || studyData.length === 0) {
+            studyData = initData;
             localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
-        } else {
-            studyData = JSON.parse(localStorage.getItem(DATA_KEY)) || [];
         }
 
         let isAdminLoggedIn = false;
@@ -152,7 +149,7 @@
                 itemData.id = 'id_' + Date.now(); studyData.push(itemData);
             }
             localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
-            cancelEdit(); renderData(); alert("发布成功！");
+            cancelEdit(); renderData(); alert("发布成功！现在随便刷新，题都不会丢了！");
         }
 
         function editItem(id) {
