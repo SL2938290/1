@@ -100,15 +100,31 @@
     <script>
         const DATA_KEY = 'universe_science_quiz_data_ultimate';
 
-        // 🌟 初始默认种子题目
-        const initData = [{"category":"q","type":"select","question":"作为这个网址至高无上玉树临风的创始人，我的智商是多少？满分一百","options":["A 100","B 100，"],"correctOpt":"A","answer":"我真的太帅了哈哈哈哈哈哈","id":"id_178101100233174"}];
+        // 🌟 绝密核心硬编码数据载体：这里已经把你刚导出的两道“创始人专属大题”焊死了！
+        const initData = [
+            {
+                "category":"q",
+                "type":"select",
+                "question":"作为这个网址至高无上玉树临风的创始人，我的智商是多少？满分一百",
+                "options":["A 100","B 100，"],
+                "correctOpt":"A",
+                "answer":"我真的太帅了哈哈哈哈哈哈",
+                "id":"id_178101100233174"
+            },
+            {
+                "category":"q",
+                "type":"text",
+                "question":"使用一篇一百字以上的作文描述我的帅气",
+                "options":[],
+                "correctOpt":"",
+                "answer":"官方参考答案：创始人英俊潇洒、气宇轩昂，不仅智慧超群达到了人类顶峰的100分，其颜值更是玉树临风、惊为天人。其帅气程度无法用语言全然描述，堪称宇宙级别的科学奇迹！",
+                "id":"id_1781012496124"
+            }
+        ];
 
-        // 🧠 修复后的核心数据逻辑：如果本地已经有出的新题，绝对优先读取本地，绝不覆盖！
-        let studyData = JSON.parse(localStorage.getItem(DATA_KEY));
-        if (!studyData || studyData.length === 0) {
-            studyData = initData;
-            localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
-        }
+        // 🧠 双轨运行逻辑：每次检测到代码更新，都强制用新代码刷洗本地缓存，确保多端绝对同步
+        let studyData = initData;
+        localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
 
         let isAdminLoggedIn = false;
         function toggleQR() { const qr = document.getElementById('qr-window'); qr.style.display = (qr.style.display === 'block') ? 'none' : 'block'; }
@@ -149,7 +165,7 @@
                 itemData.id = 'id_' + Date.now(); studyData.push(itemData);
             }
             localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
-            cancelEdit(); renderData(); alert("发布成功！现在随便刷新，题都不会丢了！");
+            cancelEdit(); renderData(); alert("发布成功！提示：想让其他设备也看到，请点击下方橘色框复制数据发给AI合并代码哦！");
         }
 
         function editItem(id) {
@@ -180,10 +196,10 @@
                     if (item.type === 'flash') {
                         catHtml += `<div class="item-wrapper flash">${adminActionHtml}<span class="badge flash">🗂️ 闪卡</span><div class="flashcard-container"><div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="card-face card-front"><h3>${item.question}</h3><small>(点击翻面)</small></div><div class="card-face card-back"><strong>💡 解释：</strong><p>${item.answer}</p></div></div></div></div>`;
                     } else if (item.type === 'select') {
-                        let optsHtml = ''; item.options.forEach((opt, idx) => { optsHtml += `<div class="option-item"><input type="radio" name="radio_${item.id}" value="${opt.charAt(0).toUpperCase()}" id="opt_${item.id}_${idx}"><label for="opt_${item.id}_${idx}">${opt}</label></div>`; });
+                        let optsHtml = ''; item.options.forEach((opt, idx) => { optsHtml += `<div class="option-item"><input type="radio" name="radio_${item.id}" value="${opt.charAt(0).toUpperCase()}" id="opt_${opt.id}_${idx}"><label for="opt_${item.id}_${idx}">${opt}</label></div>`; });
                         catHtml += `<div class="item-wrapper quiz">${adminActionHtml}<span class="badge select">📝 选择题</span><p style="font-weight:bold;">${item.question}</p><div class="options-list">${optsHtml}</div><button class="action-btn" onclick="checkSelectAnswer('${item.id}', '${item.correctOpt}')">提交</button><div id="res_${item.id}" class="result-panel"></div></div>`;
                     } else if (item.type === 'text') {
-                        catHtml += `<div class="item-wrapper short">${adminActionHtml}<span class="badge text">✍️ 简答题</span><p style="font-weight:bold;">${item.question}</p><textarea id="input_${item.id}" class="user-input" rows="2" placeholder="打字输入答案..."></textarea><button class="action-btn" onclick="checkTextAnswer('${item.id}')">检查答案</button><div id="res_${item.id}" class="result-panel view-ans"><strong>🔍 解析：</strong><br>${item.answer}</div></div>`;
+                        catHtml += `<div class="item-wrapper short">${adminActionHtml}<span class="badge text">✍️ 简答题</span><p style="font-weight:bold;">${item.question}</p><textarea id="input_${item.id}" class="user-input" rows="3" placeholder="打字输入答案..."></textarea><button class="action-btn" onclick="checkTextAnswer('${item.id}')">检查参考解析</button><div id="res_${item.id}" class="result-panel view-ans"><strong>🔍 官方标准解析：</strong><br>${item.answer}</div></div>`;
                     }
                 });
                 catHtml += `</div>`; displayZone.innerHTML += catHtml;
