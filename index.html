@@ -5,212 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🧬 宇宙无敌厉害牛逼科学题</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding-bottom: 80px; /* 留出底部空间给微信小悬浮窗 */
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            font-size: 28px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            margin-bottom: 30px; /* 增加大标题底部的间距 */
-        }
-        .category-block {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .category-title {
-            color: #2e7d32;
-            border-bottom: 2px solid #81c784;
-            padding-bottom: 8px;
-            margin-top: 0;
-        }
-        
-        /* 核心外壳 */
-        .item-wrapper {
-            background: #f9f9f9;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 8px;
-            border-left: 4px solid #ccc;
-            position: relative;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 700px; margin: 0 auto; padding-bottom: 80px; }
+        h1 { text-align: center; color: #2c3e50; font-size: 28px; margin-bottom: 30px; }
+        .category-block { background: white; padding: 20px; margin: 20px 0; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .category-title { color: #2e7d32; border-bottom: 2px solid #81c784; padding-bottom: 8px; margin-top: 0; }
+        .item-wrapper { background: #f9f9f9; padding: 15px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #ccc; position: relative; }
         .item-wrapper.quiz { border-left-color: #2196f3; }
         .item-wrapper.short { border-left-color: #ff9800; }
         .item-wrapper.flash { border-left-color: #4caf50; }
-        
-        .badge {
-            display: inline-block;
-            padding: 3px 8px;
-            font-size: 12px;
-            color: white;
-            border-radius: 4px;
-            margin-bottom: 12px;
-        }
+        .badge { display: inline-block; padding: 3px 8px; font-size: 12px; color: white; border-radius: 4px; margin-bottom: 12px; }
         .badge.flash { background: #4caf50; }
         .badge.select { background: #2196f3; }
         .badge.text { background: #ff9800; }
-
-        /* 管理员操作按钮 */
-        .admin-action-btns {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: none;
-            z-index: 100;
-        }
-        .mini-btn {
-            padding: 5px 10px;
-            font-size: 12px;
-            margin-left: 5px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        .admin-action-btns { position: absolute; top: 12px; right: 12px; display: none; z-index: 100; }
+        .mini-btn { padding: 5px 10px; font-size: 12px; margin-left: 5px; border-radius: 4px; border: none; cursor: pointer; font-weight: bold; }
         .mini-btn.edit { background: #ffb300; color: #333; }
         .mini-btn.del { background: #e53935; color: white; }
-        .mini-btn:hover { opacity: 0.9; }
-
-        /* 闪卡区域 */
-        .flashcard-container {
-            perspective: 1000px;
-            margin-top: 10px;
-            width: 100%;
-            height: 140px;
-        }
-        .flashcard {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-            cursor: pointer;
-        }
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 8px;
-            padding: 15px;
-            box-sizing: border-box;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-        }
-        .card-front {
-            background: #e8f5e9;
-            border: 1px solid #a5d6a7;
-            color: #2e7d32;
-        }
-        .card-back {
-            background: #fff;
-            border: 1px solid #81c784;
-            color: #333;
-            transform: rotateY(180deg);
-            overflow-y: auto;
-        }
-
-        /* 互动元素 */
+        .flashcard-container { perspective: 1000px; margin-top: 10px; width: 100%; height: 140px; }
+        .flashcard { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.5s; cursor: pointer; }
+        .flashcard.flipped { transform: rotateY(180deg); }
+        .card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; padding: 15px; box-sizing: border-box; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+        .card-front { background: #e8f5e9; border: 1px solid #a5d6a7; color: #2e7d32; }
+        .card-back { background: #fff; border: 1px solid #81c784; color: #333; transform: rotateY(180deg); overflow-y: auto; }
         .options-list { margin: 10px 0; }
         .option-item { margin: 8px 0; display: flex; align-items: center; }
         .option-item input { margin-right: 10px; transform: scale(1.2); }
-        textarea.user-input {
-            width: 100%; padding: 8px; border: 1px solid #ccc;
-            border-radius: 6px; resize: vertical; margin-top: 5px; font-family: inherit; box-sizing: border-box;
-        }
-        
-        .result-panel {
-            display: none; margin-top: 12px; padding: 12px;
-            border-radius: 6px; font-weight: bold;
-        }
+        textarea.user-input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; resize: vertical; margin-top: 5px; font-family: inherit; box-sizing: border-box; }
+        .result-panel { display: none; margin-top: 12px; padding: 12px; border-radius: 6px; font-weight: bold; }
         .result-panel.correct { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
         .result-panel.wrong { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
         .result-panel.view-ans { background: #fff3e0; color: #e65100; border: 1px solid #ffe082; font-weight: normal; }
-
-        button.action-btn {
-            background: #3498db; color: white; border: none;
-            padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; margin-top: 8px;
-        }
+        button.action-btn { background: #3498db; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; margin-top: 8px; }
         button.action-btn:hover { background: #2980b9; }
-
-        /* 管理员面板 */
-        .admin-zone {
-            margin-top: 50px; padding: 20px; background: #eceff1;
-            border: 2px dashed #b0bec5; border-radius: 12px;
-        }
-        .admin-form input, .admin-form select, .admin-form textarea {
-            width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box;
-            border: 1px solid #cfd8dc; border-radius: 4px;
-        }
+        .admin-zone { margin-top: 50px; padding: 20px; background: #eceff1; border: 2px dashed #b0bec5; border-radius: 12px; }
+        .admin-form input, .admin-form select, .admin-form textarea { width: 100%; padding: 8px; margin: 8px 0; box-sizing: border-box; border: 1px solid #cfd8dc; border-radius: 4px; }
         .hidden { display: none; }
-
-        /* ================= 右下角悬浮微信二维码 ================= */
-        .wechat-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 999;
-            background: #4caf50;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s;
-        }
-        .wechat-float:hover {
-            transform: scale(1.05);
-            background: #45a049;
-        }
-        /* 弹出的二维码面板 */
-        .qr-popup {
-            display: none;
-            position: fixed;
-            bottom: 75px;
-            right: 25px;
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            z-index: 1000;
-            text-align: center;
-            width: 200px;
-            border: 1px solid #eee;
-        }
-        .qr-popup img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-        }
-        .qr-popup p {
-            margin: 8px 0 0 0;
-            font-size: 13px;
-            color: #333;
-            font-weight: bold;
-        }
+        .wechat-float { position: fixed; bottom: 25px; right: 25px; z-index: 999; background: #4caf50; color: white; padding: 10px 15px; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer; font-size: 14px; font-weight: bold; }
+        .qr-popup { display: none; position: fixed; bottom: 75px; right: 25px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); z-index: 1000; text-align: center; width: 200px; border: 1px solid #eee; }
+        .qr-popup img { width: 100%; height: auto; border-radius: 4px; }
+        .qr-popup p { margin: 8px 0 0 0; font-size: 13px; color: #333; font-weight: bold; }
+        
+        /* 秘密武器：导出按钮区域的样式 */
+        .export-box { background: #fff3e0; border: 1px dashed #ff9800; padding: 10px; margin-top: 15px; border-radius: 6px; }
     </style>
 </head>
 <body>
@@ -219,46 +56,37 @@
         <h1>🧬 宇宙无敌厉害牛逼科学题</h1>
         <div id="content-display"></div>
 
-        <hr style="margin-top: 60px; border: 0; border-top: 1px solid #ccc;">
-
         <div class="admin-zone">
             <h3>🔒 老师/管理员出题后台</h3>
             <div id="login-form">
                 <input type="password" id="admin-pwd" placeholder="请输入管理员密码（默认123456）">
                 <button class="action-btn" onclick="checkPassword()">登录后台</button>
             </div>
-
             <div id="control-panel" class="hidden">
-                <p style="color: green; font-weight: bold;">🔑 认证成功！你可以在这里直接网页出题、编辑修改：</p>
-                
                 <div class="admin-form">
                     <input type="hidden" id="form-edit-id" value="">
-
-                    <label>1. 输入或选择课程分类：</label>
-                    <input type="text" id="form-category" placeholder="例如：第一单元 物质的变化">
-
+                    <label>1. 课程分类：</label><input type="text" id="form-category" placeholder="例如：第一单元 物质的变化">
                     <label>2. 内容类型：</label>
                     <select id="form-type" onchange="adaptForm()">
                         <option value="flash">🗂️ 核心词汇闪卡</option>
                         <option value="select">📝 选择题</option>
                         <option value="text">✍️ 简答题</option>
                     </select>
-
-                    <label>3. 题目/词汇内容：</label>
-                    <textarea id="form-question" rows="2" placeholder="输入词汇名称或题目内容"></textarea>
-
+                    <label>3. 题目/词汇内容：</label><textarea id="form-question" rows="2"></textarea>
                     <div id="options-group" class="hidden">
-                        <label>选择题选项（用英文逗号 `,` 隔开）：</label>
-                        <input type="text" id="form-options" placeholder="例如：A.氧气, B.二氧化碳, C.氮气">
-                        <label>正确选项对应的字母（必须是单字母，如 B）：</label>
-                        <input type="text" id="form-correct-opt" placeholder="B">
+                        <label>选择题选项（用英文逗号隔开）：</label><input type="text" id="form-options" placeholder="A.氧气, B.二氧化碳">
+                        <label>正确答案字母：</label><input type="text" id="form-correct-opt" placeholder="B">
                     </div>
-
-                    <label>4. 答案与详细解析：</label>
-                    <textarea id="form-answer" rows="3" placeholder="输入反面解释或正确答案及原因解释"></textarea>
-
-                    <button id="submit-btn" onclick="saveItem()" style="background: #2e7d32; width: 100%; font-size: 16px; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">➕ 发布到网站</button>
+                    <label>4. 答案与详细解析：</label><textarea id="form-answer" rows="3"></textarea>
+                    <button id="submit-btn" onclick="saveItem()" style="background: #2e7d32; width: 100%; font-size: 16px; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">➕ 发布/更新题目</button>
                     <button id="cancel-edit-btn" onclick="cancelEdit()" class="hidden" style="background: #78909c; width: 100%; margin-top: 5px; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">取消编辑</button>
+                    
+                    <div class="export-box">
+                        <p style="margin:0 0 5px 0; color:#e65100; font-weight:bold;">📲 同步数据到手机专用通道：</p>
+                        <button onclick="exportMyData()" style="background:#ff9800; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-weight:bold;">点击一键复制我的全部题目</button>
+                        <p style="font-size:12px; color:gray; margin:5px 0 0 0;">点击后会自动复制代码，直接发到微信聊天框给AI即可。</p>
+                    </div>
+                    
                     <button onclick="clearAllData()" style="background: #d32f2f; margin-top: 20px; width: 100%; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">⚠️ 清空所有题目（高度慎重）</button>
                 </div>
             </div>
@@ -274,81 +102,61 @@
 
     <script>
         const DATA_KEY = 'universe_science_quiz_data_ultimate';
-        let studyData = JSON.parse(localStorage.getItem(DATA_KEY)) || [];
+        
+        // 🌟 网页内置初始模版（用来打底）
+        const defaultData = [
+            { id: "d1", category: "第一单元 物质的变化", type: "flash", question: "化学变化", options: [], correctOpt: "", answer: "产生了新物质的变化，比如铁生锈、蜡烛燃烧。" },
+            { id: "d2", category: "第一单元 物质的变化", type: "select", question: "下列哪种现象属于物理变化？", options: ["A. 冰融化成水", "B. 火柴燃烧", "C. 食物变质"], correctOpt: "A", answer: "冰融化只是状态改变，没有产生新物质，属于物理变化。" }
+        ];
+
+        // 🌟【最核心改动】：如果代码里被硬编码嵌入了数据，直接优先用硬编码的
+        const HARDCODED_DATA = /*START_DATA*/ null /*END_DATA*/;
+
+        let studyData;
+        if (HARDCODED_DATA && HARDCODED_DATA.length > 0) {
+            studyData = HARDCODED_DATA;
+            localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
+        } else {
+            studyData = JSON.parse(localStorage.getItem(DATA_KEY)) || defaultData;
+        }
+
         let isAdminLoggedIn = false;
-
-        function toggleQR() {
-            const qr = document.getElementById('qr-window');
-            qr.style.display = (qr.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function checkPassword() {
-            const pwd = document.getElementById('admin-pwd').value;
-            if (pwd === "123456") {
-                isAdminLoggedIn = true;
-                document.getElementById('login-form').classList.add('hidden');
-                document.getElementById('control-panel').classList.remove('hidden');
-                alert("登录成功！题目/闪卡右上角已成功解锁【编辑】和【删除】按钮。");
-                renderData();
-            } else {
-                alert("密码错误！");
-            }
-        }
-
-        function adaptForm() {
-            const type = document.getElementById('form-type').value;
-            if (type === 'select') {
-                document.getElementById('options-group').classList.remove('hidden');
-            } else {
-                document.getElementById('options-group').classList.add('hidden');
-            }
+        function toggleQR() { const qr = document.getElementById('qr-window'); qr.style.display = (qr.style.display === 'block') ? 'none' : 'block'; }
+        function checkPassword() { if (document.getElementById('admin-pwd').value === "123456") { isAdminLoggedIn = true; document.getElementById('login-form').classList.add('hidden'); document.getElementById('control-panel').classList.remove('hidden'); alert("登录成功！已解锁修改功能。"); renderData(); } else { alert("密码错误！"); } }
+        function adaptForm() { document.getElementById('options-group').classList(document.getElementById('form-type').value === 'select' ? 'remove' : 'add')('hidden'); }
+        
+        // 🌟 一键导出核心逻辑：直接把数据塞进剪贴板
+        function exportMyData() {
+            const dataStr = localStorage.getItem(DATA_KEY) || JSON.stringify(studyData);
+            navigator.clipboard.writeText(dataStr).then(() => {
+                alert("📋 复制成功！请立刻去微信里粘贴发给AI，AI就会帮你把题目永远锁在网址里！");
+            }).catch(() => {
+                alert("复制失败，请手动在控制台提取。");
+            });
         }
 
         function saveItem() {
             const editId = document.getElementById('form-edit-id').value;
-            const category = document.getElementById('form-category').value.trim();
-            const type = document.getElementById('form-type').value;
-            const question = document.getElementById('form-question').value.trim();
-            const options = document.getElementById('form-options').value.trim();
-            const correctOpt = document.getElementById('form-correct-opt').value.trim().toUpperCase();
-            const answer = document.getElementById('form-answer').value.trim();
-
-            if (!category || !question || !answer) {
-                alert("请把必要内容填完整！");
-                return;
-            }
-
             const itemData = {
-                category: category,
-                type: type,
-                question: question,
-                options: options ? options.split(',').map(o => o.trim()) : [],
-                correctOpt: correctOpt,
-                answer: answer
+                category: document.getElementById('form-category').value.trim() || "科学测试",
+                type: document.getElementById('form-type').value,
+                question: document.getElementById('form-question').value.trim(),
+                options: document.getElementById('form-options').value ? document.getElementById('form-options').value.split(',').map(o => o.trim()) : [],
+                correctOpt: document.getElementById('form-correct-opt').value.trim().toUpperCase(),
+                answer: document.getElementById('form-answer').value.trim()
             };
-
             if (editId) {
-                const index = studyData.findIndex(item => item.id === editId);
-                if (index !== -1) {
-                    itemData.id = editId;
-                    studyData[index] = itemData;
-                    alert("修改成功！");
-                }
+                const idx = studyData.findIndex(i => i.id === editId);
+                if (idx !== -1) { itemData.id = editId; studyData[idx] = itemData; }
             } else {
-                itemData.id = 'id_' + Date.now() + Math.floor(Math.random()*100);
-                studyData.push(itemData);
-                alert("发布成功！");
+                itemData.id = 'id_' + Date.now(); studyData.push(itemData);
             }
-
             localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
-            cancelEdit();
-            renderData();
+            cancelEdit(); renderData(); alert("操作成功！");
         }
 
         function editItem(id) {
-            const item = studyData.find(i => i.id === id);
-            if (!item) return;
-
+            const item = studyData.find(i => i.id === id); if (!item) return;
             document.getElementById('form-edit-id').value = item.id;
             document.getElementById('form-category').value = item.category;
             document.getElementById('form-type').value = item.type;
@@ -356,165 +164,36 @@
             document.getElementById('form-options').value = item.options.join(', ');
             document.getElementById('form-correct-opt').value = item.correctOpt;
             document.getElementById('form-answer').value = item.answer;
-
-            adaptForm();
-
+            if(item.type==='select') document.getElementById('options-group').classList.remove('hidden');
             document.getElementById('submit-btn').innerText = "💾 保存修改内容";
-            document.getElementById('submit-btn').style.background = "#ff9800";
             document.getElementById('cancel-edit-btn').classList.remove('hidden');
-            
-            document.getElementById('control-panel').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function cancelEdit() {
-            document.getElementById('form-edit-id').value = '';
-            document.getElementById('form-question').value = '';
-            document.getElementById('form-options').value = '';
-            document.getElementById('form-correct-opt').value = '';
-            document.getElementById('form-answer').value = '';
-            
-            document.getElementById('submit-btn').innerText = "➕ 发布到网站";
-            document.getElementById('submit-btn').style.background = "#2e7d32";
-            document.getElementById('cancel-edit-btn').classList.add('hidden');
-        }
-
-        function deleteItem(id) {
-            if (confirm("确定要删除这项内容吗？")) {
-                studyData = studyData.filter(item => item.id !== id);
-                localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
-                renderData();
-            }
-        }
+        function cancelEdit() { document.getElementById('form-edit-id').value = ''; document.getElementById('form-question').value = ''; document.getElementById('form-options').value = ''; document.getElementById('form-correct-opt').value = ''; document.getElementById('form-answer').value = ''; document.getElementById('submit-btn').innerText = "➕ 发布/更新题目"; document.getElementById('cancel-edit-btn').classList.add('hidden'); }
+        function deleteItem(id) { if (confirm("确定删除吗？")) { studyData = studyData.filter(i => i.id !== id); localStorage.setItem(DATA_KEY, JSON.stringify(studyData)); renderData(); } }
 
         function renderData() {
-            const displayZone = document.getElementById('content-display');
-            displayZone.innerHTML = '';
-
-            if (studyData.length === 0) {
-                displayZone.innerHTML = '<p style="text-align:center; color:#999;">暂无内容，请在下方管理员后台创建第一道题吧！</p>';
-                return;
-            }
-
-            const categories = {};
-            studyData.forEach(item => {
-                if (!categories[item.category]) categories[item.category] = [];
-                categories[item.category].push(item);
-            });
-
-            const displayStyle = isAdminLoggedIn ? 'display: inline-block;' : 'display: none;';
-
+            const displayZone = document.getElementById('content-display'); displayZone.innerHTML = '';
+            const categories = {}; studyData.forEach(item => { if (!categories[item.category]) categories[item.category] = []; categories[item.category].push(item); });
+            const btnStyle = isAdminLoggedIn ? 'display: inline-block;' : 'display: none;';
             for (let catName in categories) {
                 let catHtml = `<div class="category-block"><h2 class="category-title">📂 ${catName}</h2>`;
-                
                 categories[catName].forEach(item => {
-                    let adminActionHtml = `
-                        <div class="admin-action-btns" style="${displayStyle}">
-                            <button class="mini-btn edit" onclick="editItem('${item.id}')">✏️ 编辑</button>
-                            <button class="mini-btn del" onclick="deleteItem('${item.id}')">❌ 删除</button>
-                        </div>
-                    `;
-
+                    let adminActionHtml = `<div class="admin-action-btns" style="${btnStyle}"><button class="mini-btn edit" onclick="editItem('${item.id}')">✏️</button><button class="mini-btn del" onclick="deleteItem('${item.id}')">❌</button></div>`;
                     if (item.type === 'flash') {
-                        catHtml += `
-                            <div class="item-wrapper flash">
-                                ${adminActionHtml}
-                                <span class="badge flash">🗂️ 闪卡</span>
-                                <div class="flashcard-container">
-                                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
-                                        <div class="card-face card-front">
-                                            <h3 style="margin:0; text-align:center; padding: 0 10px;">${item.question}</h3>
-                                            <small style="color:#666; margin-top:8px;">(点击卡片翻面)</small>
-                                        </div>
-                                        <div class="card-face card-back">
-                                            <strong>💡 解释：</strong>
-                                            <p style="margin: 6px 0 0 0; text-align:center;">${item.answer}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
+                        catHtml += `<div class="item-wrapper flash">${adminActionHtml}<span class="badge flash">🗂️ 闪卡</span><div class="flashcard-container"><div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="card-face card-front"><h3>${item.question}</h3><small>(点击翻面)</small></div><div class="card-face card-back"><strong>💡 解释：</strong><p>${item.answer}</p></div></div></div></div>`;
                     } else if (item.type === 'select') {
-                        let optsHtml = '';
-                        item.options.forEach((opt, index) => {
-                            optsHtml += `
-                                <div class="option-item">
-                                    <input type="radio" name="radio_${item.id}" value="${opt.charAt(0).toUpperCase()}" id="opt_${item.id}_${index}">
-                                    <label for="opt_${item.id}_${index}">${opt}</label>
-                                </div>
-                            `;
-                        });
-
-                        catHtml += `
-                            <div class="item-wrapper quiz">
-                                ${adminActionHtml}
-                                <span class="badge select">📝 选择题</span>
-                                <p style="font-weight:bold; margin: 5px 0; padding-right:100px;">${item.question}</p>
-                                <div class="options-list">${optsHtml}</div>
-                                <button class="action-btn" onclick="checkSelectAnswer('${item.id}', '${item.correctOpt}')">提交回答</button>
-                                <div id="res_${item.id}" class="result-panel"></div>
-                            </div>
-                        `;
+                        let optsHtml = ''; item.options.forEach((opt, idx) => { optsHtml += `<div class="option-item"><input type="radio" name="radio_${item.id}" value="${opt.charAt(0).toUpperCase()}" id="opt_${item.id}_${idx}"><label for="opt_${item.id}_${idx}">${opt}</label></div>`; });
+                        catHtml += `<div class="item-wrapper quiz">${adminActionHtml}<span class="badge select">📝 选择题</span><p style="font-weight:bold;">${item.question}</p><div class="options-list">${optsHtml}</div><button class="action-btn" onclick="checkSelectAnswer('${item.id}', '${item.correctOpt}')">提交</button><div id="res_${item.id}" class="result-panel"></div></div>`;
                     } else if (item.type === 'text') {
-                        catHtml += `
-                            <div class="item-wrapper short">
-                                ${adminActionHtml}
-                                <span class="badge text">✍️ 简答题</span>
-                                <p style="font-weight:bold; margin: 5px 0; padding-right:100px;">${item.question}</p>
-                                <textarea id="input_${item.id}" class="user-input" rows="3" placeholder="同学们可以在这里打字输入你的答案..."></textarea>
-                                <button class="action-btn" onclick="checkTextAnswer('${item.id}')">检查参考答案</button>
-                                <div id="res_${item.id}" class="result-panel view-ans">
-                                    <strong>🔍 参考答案与解析：</strong><br>${item.answer}
-                                </div>
-                            </div>
-                        `;
+                        catHtml += `<div class="item-wrapper short">${adminActionHtml}<span class="badge text">✍️ 简答题</span><p style="font-weight:bold;">${item.question}</p><textarea id="input_${item.id}" class="user-input" rows="2" placeholder="打字输入答案..."></textarea><button class="action-btn" onclick="checkTextAnswer('${item.id}')">检查答案</button><div id="res_${item.id}" class="result-panel view-ans"><strong>🔍 解析：</strong><br>${item.answer}</div></div>`;
                     }
                 });
-
-                catHtml += `</div>`;
-                displayZone.innerHTML += catHtml;
+                catHtml += `</div>`; displayZone.innerHTML += catHtml;
             }
         }
-
-        function checkSelectAnswer(id, correctOpt) {
-            const radios = document.getElementsByName(`radio_${id}`);
-            let selectedValue = "";
-            for (const radio of radios) {
-                if (radio.checked) { selectedValue = radio.value; break; }
-            }
-            const resPanel = document.getElementById(`res_${id}`);
-            resPanel.style.display = "block";
-            if (!selectedValue) {
-                resPanel.className = "result-panel wrong";
-                resPanel.innerHTML = "⚠️ 请先选择一个选项再提交！";
-                return;
-            }
-            if (selectedValue === correctOpt) {
-                resPanel.className = "result-panel correct";
-                resPanel.innerHTML = `🎉 回答正确！正确答案就是 ${correctOpt}。`;
-            } else {
-                resPanel.className = "result-panel wrong";
-                resPanel.innerHTML = `❌ 回答错误。你选了 ${selectedValue}，正确答案是 ${correctOpt}。`;
-            }
-        }
-
-        function checkTextAnswer(id) {
-            const resPanel = document.getElementById(`res_${id}`);
-            resPanel.style.display = (resPanel.style.display === "block") ? "none" : "block";
-        }
-
-        function clearAllData() {
-            if (confirm("确定要删除所有题目吗？此操作不可逆！")) {
-                localStorage.removeItem(DATA_KEY);
-                studyData = [];
-                renderData();
-            }
-        }
-
-        renderData();
-    </script>
-</body>
-</html>
-
+        function checkSelectAnswer(id, correctOpt) { const radios = document.getElementsByName(`radio_${id}`); let val = ""; for (const r of radios) { if (r.checked) { val = r.value; break; } } const p = document.getElementById(`res_${id}`); p.style.display = "block"; if (val === correctOpt) { p.className = "result-panel correct"; p.innerHTML = "🎉 回答正确！"; } else { p.className = "result-panel wrong"; p.innerHTML = `❌ 错误。正确答案是 ${correctOpt}。`; } }
+        function checkTextAnswer(id) { const p = document.getElementById(`res_${id}`); p.style.display = (p.style.display === "block") ? "none" : "block"; }
         renderData();
     </script>
 </body>
