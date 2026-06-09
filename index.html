@@ -45,8 +45,6 @@
         .qr-popup { display: none; position: fixed; bottom: 75px; right: 25px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); z-index: 1000; text-align: center; width: 200px; border: 1px solid #eee; }
         .qr-popup img { width: 100%; height: auto; border-radius: 4px; }
         .qr-popup p { margin: 8px 0 0 0; font-size: 13px; color: #333; font-weight: bold; }
-        
-        /* 秘密武器：导出按钮区域的样式 */
         .export-box { background: #fff3e0; border: 1px dashed #ff9800; padding: 10px; margin-top: 15px; border-radius: 6px; }
     </style>
 </head>
@@ -82,9 +80,8 @@
                     <button id="cancel-edit-btn" onclick="cancelEdit()" class="hidden" style="background: #78909c; width: 100%; margin-top: 5px; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">取消编辑</button>
                     
                     <div class="export-box">
-                        <p style="margin:0 0 5px 0; color:#e65100; font-weight:bold;">📲 同步数据到手机专用通道：</p>
-                        <button onclick="exportMyData()" style="background:#ff9800; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-weight:bold;">点击一键复制我的全部题目</button>
-                        <p style="font-size:12px; color:gray; margin:5px 0 0 0;">点击后会自动复制代码，直接发到微信聊天框给AI即可。</p>
+                        <p style="margin:0 0 5px 0; color:#e65100; font-weight:bold;">📲 提取最新题目数据数据（锁死到手机用）：</p>
+                        <button onclick="exportMyData()" style="background:#ff9800; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-weight:bold;">点击一键复制我写好的题</button>
                     </div>
                     
                     <button onclick="clearAllData()" style="background: #d32f2f; margin-top: 20px; width: 100%; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">⚠️ 清空所有题目（高度慎重）</button>
@@ -103,14 +100,16 @@
     <script>
         const DATA_KEY = 'universe_science_quiz_data_ultimate';
         
-        // 🌟 网页内置初始模版（用来打底）
+        // 🌟 内置的打底科学题目数据
         const defaultData = [
             { id: "d1", category: "第一单元 物质的变化", type: "flash", question: "化学变化", options: [], correctOpt: "", answer: "产生了新物质的变化，比如铁生锈、蜡烛燃烧。" },
             { id: "d2", category: "第一单元 物质的变化", type: "select", question: "下列哪种现象属于物理变化？", options: ["A. 冰融化成水", "B. 火柴燃烧", "C. 食物变质"], correctOpt: "A", answer: "冰融化只是状态改变，没有产生新物质，属于物理变化。" }
         ];
 
-        // 🌟【最核心改动】：如果代码里被硬编码嵌入了数据，直接优先用硬编码的
-        const HARDCODED_DATA = /*START_DATA*/ null /*END_DATA*/;
+        // 🌟 核心数据载体
+        /*START_DATA*/ 
+        const HARDCODED_DATA = null; 
+        /*END_DATA*/
 
         let studyData;
         if (HARDCODED_DATA && HARDCODED_DATA.length > 0) {
@@ -123,15 +122,22 @@
         let isAdminLoggedIn = false;
         function toggleQR() { const qr = document.getElementById('qr-window'); qr.style.display = (qr.style.display === 'block') ? 'none' : 'block'; }
         function checkPassword() { if (document.getElementById('admin-pwd').value === "123456") { isAdminLoggedIn = true; document.getElementById('login-form').classList.add('hidden'); document.getElementById('control-panel').classList.remove('hidden'); alert("登录成功！已解锁修改功能。"); renderData(); } else { alert("密码错误！"); } }
-        function adaptForm() { document.getElementById('options-group').classList(document.getElementById('form-type').value === 'select' ? 'remove' : 'add')('hidden'); }
         
-        // 🌟 一键导出核心逻辑：直接把数据塞进剪贴板
+        function adaptForm() { 
+            const type = document.getElementById('form-type').value;
+            if (type === 'select') {
+                document.getElementById('options-group').classList.remove('hidden');
+            } else {
+                document.getElementById('options-group').classList.add('hidden');
+            }
+        }
+        
         function exportMyData() {
             const dataStr = localStorage.getItem(DATA_KEY) || JSON.stringify(studyData);
             navigator.clipboard.writeText(dataStr).then(() => {
-                alert("📋 复制成功！请立刻去微信里粘贴发给AI，AI就会帮你把题目永远锁在网址里！");
+                alert("📋 数据复制成功！直接去微信聊天框【粘贴】发给AI，AI就会帮你把题锁在网址里！");
             }).catch(() => {
-                alert("复制失败，请手动在控制台提取。");
+                alert("复制失败，请尝试在电脑上操作。");
             });
         }
 
@@ -152,7 +158,7 @@
                 itemData.id = 'id_' + Date.now(); studyData.push(itemData);
             }
             localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
-            cancelEdit(); renderData(); alert("操作成功！");
+            cancelEdit(); renderData(); alert("发布成功！");
         }
 
         function editItem(id) {
@@ -194,6 +200,9 @@
         }
         function checkSelectAnswer(id, correctOpt) { const radios = document.getElementsByName(`radio_${id}`); let val = ""; for (const r of radios) { if (r.checked) { val = r.value; break; } } const p = document.getElementById(`res_${id}`); p.style.display = "block"; if (val === correctOpt) { p.className = "result-panel correct"; p.innerHTML = "🎉 回答正确！"; } else { p.className = "result-panel wrong"; p.innerHTML = `❌ 错误。正确答案是 ${correctOpt}。`; } }
         function checkTextAnswer(id) { const p = document.getElementById(`res_${id}`); p.style.display = (p.style.display === "block") ? "none" : "block"; }
+        function clearAllData() { if (confirm("确定清空吗？")) { localStorage.removeItem(DATA_KEY); studyData = []; renderData(); } }
+        
+        // 确保正确调用渲染
         renderData();
     </script>
 </body>
