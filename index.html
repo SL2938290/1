@@ -100,15 +100,9 @@
     <script>
         const DATA_KEY = 'universe_science_quiz_data_ultimate';
         
-        // 🌟 内置的打底科学题目数据
-        const defaultData = [
-            { id: "d1", category: "第一单元 物质的变化", type: "flash", question: "化学变化", options: [], correctOpt: "", answer: "产生了新物质的变化，比如铁生锈、蜡烛燃烧。" },
-            { id: "d2", category: "第一单元 物质的变化", type: "select", question: "下列哪种现象属于物理变化？", options: ["A. 冰融化成水", "B. 火柴燃烧", "C. 食物变质"], correctOpt: "A", answer: "冰融化只是状态改变，没有产生新物质，属于物理变化。" }
-        ];
-
-        // 🌟 核心数据载体
+        // 🌟 核心数据载体：已经把你出的创始人智商题深深烙印进去了！
         /*START_DATA*/ 
-        const HARDCODED_DATA = null; 
+        const HARDCODED_DATA = [{"category":"q","type":"select","question":"作为这个网址至高无上玉树临风的创始人，我的智商是多少？满分一百","options":["A 100","B 100，"],"correctOpt":"A","answer":"我真的太帅了哈哈哈哈哈哈","id":"id_178101100233174"}]; 
         /*END_DATA*/
 
         let studyData;
@@ -116,7 +110,7 @@
             studyData = HARDCODED_DATA;
             localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
         } else {
-            studyData = JSON.parse(localStorage.getItem(DATA_KEY)) || defaultData;
+            studyData = JSON.parse(localStorage.getItem(DATA_KEY)) || [];
         }
 
         let isAdminLoggedIn = false;
@@ -202,7 +196,6 @@
         function checkTextAnswer(id) { const p = document.getElementById(`res_${id}`); p.style.display = (p.style.display === "block") ? "none" : "block"; }
         function clearAllData() { if (confirm("确定清空吗？")) { localStorage.removeItem(DATA_KEY); studyData = []; renderData(); } }
         
-        // 确保正确调用渲染
         renderData();
     </script>
 </body>
