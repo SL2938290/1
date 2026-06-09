@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧬 宇宙无敌厉害牛逼科学题</title>
+    <title>🧬 超级无敌旋风牛逼问题</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; color: #333; }
         .container { max-width: 700px; margin: 0 auto; padding-bottom: 80px; }
@@ -51,7 +51,7 @@
 <body>
 
     <div class="container">
-        <h1>🧬 宇宙无敌厉害牛逼科学题</h1>
+        <h1>🧬 超级无敌旋风牛逼问题</h1>
         <div id="content-display"></div>
 
         <div class="admin-zone">
@@ -100,7 +100,7 @@
     <script>
         const DATA_KEY = 'universe_science_quiz_data_ultimate';
 
-        // 🌟 绝密核心硬编码数据载体：这里已经把你刚导出的两道“创始人专属大题”焊死了！
+        // 🌟 核心硬编码数据
         const initData = [
             {
                 "category":"q",
@@ -108,7 +108,7 @@
                 "question":"作为这个网址至高无上玉树临风的创始人，我的智商是多少？满分一百",
                 "options":["A 100","B 100，"],
                 "correctOpt":"A",
-                "answer":"我真的太帅了哈哈哈哈哈哈",
+                "answer":"我真的太帅了哈哈哈哈科学奇迹",
                 "id":"id_178101100233174"
             },
             {
@@ -122,7 +122,7 @@
             }
         ];
 
-        // 🧠 双轨运行逻辑：每次检测到代码更新，都强制用新代码刷洗本地缓存，确保多端绝对同步
+        // 🧠 强制覆盖本地逻辑，确保 GitHub 部署成功后，所有设备第一眼看到的就是最新版
         let studyData = initData;
         localStorage.setItem(DATA_KEY, JSON.stringify(studyData));
 
@@ -180,7 +180,7 @@
             if(item.type==='select') document.getElementById('options-group').classList.remove('hidden');
             document.getElementById('submit-btn').innerText = "💾 保存修改内容";
             document.getElementById('cancel-edit-btn').classList.remove('hidden');
-        } 
+        }
 
         function cancelEdit() { document.getElementById('form-edit-id').value = ''; document.getElementById('form-question').value = ''; document.getElementById('form-options').value = ''; document.getElementById('form-correct-opt').value = ''; document.getElementById('form-answer').value = ''; document.getElementById('submit-btn').innerText = "➕ 发布/更新题目"; document.getElementById('cancel-edit-btn').classList.add('hidden'); }
         function deleteItem(id) { if (confirm("确定删除吗？")) { studyData = studyData.filter(i => i.id !== id); localStorage.setItem(DATA_KEY, JSON.stringify(studyData)); renderData(); } }
@@ -196,7 +196,7 @@
                     if (item.type === 'flash') {
                         catHtml += `<div class="item-wrapper flash">${adminActionHtml}<span class="badge flash">🗂️ 闪卡</span><div class="flashcard-container"><div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="card-face card-front"><h3>${item.question}</h3><small>(点击翻面)</small></div><div class="card-face card-back"><strong>💡 解释：</strong><p>${item.answer}</p></div></div></div></div>`;
                     } else if (item.type === 'select') {
-                        let optsHtml = ''; item.options.forEach((opt, idx) => { optsHtml += `<div class="option-item"><input type="radio" name="radio_${item.id}" value="${opt.charAt(0).toUpperCase()}" id="opt_${opt.id}_${idx}"><label for="opt_${item.id}_${idx}">${opt}</label></div>`; });
+                        let optsHtml = ''; item.options.forEach((opt, idx) => { optsHtml += `<div class="option-item"><input type="radio" name="radio_${item.id}" value="${opt.charAt(0).toUpperCase()}" id="opt_${item.id}_${idx}"><label for="opt_${item.id}_${idx}">${opt}</label></div>`; });
                         catHtml += `<div class="item-wrapper quiz">${adminActionHtml}<span class="badge select">📝 选择题</span><p style="font-weight:bold;">${item.question}</p><div class="options-list">${optsHtml}</div><button class="action-btn" onclick="checkSelectAnswer('${item.id}', '${item.correctOpt}')">提交</button><div id="res_${item.id}" class="result-panel"></div></div>`;
                     } else if (item.type === 'text') {
                         catHtml += `<div class="item-wrapper short">${adminActionHtml}<span class="badge text">✍️ 简答题</span><p style="font-weight:bold;">${item.question}</p><textarea id="input_${item.id}" class="user-input" rows="3" placeholder="打字输入答案..."></textarea><button class="action-btn" onclick="checkTextAnswer('${item.id}')">检查参考解析</button><div id="res_${item.id}" class="result-panel view-ans"><strong>🔍 官方标准解析：</strong><br>${item.answer}</div></div>`;
@@ -211,5 +211,7 @@
         
         renderData();
     </script>
+</body>
+</html>
 </body>
 </html>
