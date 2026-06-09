@@ -180,7 +180,7 @@
             if(item.type==='select') document.getElementById('options-group').classList.remove('hidden');
             document.getElementById('submit-btn').innerText = "💾 保存修改内容";
             document.getElementById('cancel-edit-btn').classList.remove('hidden');
-        }
+        } 
 
         function cancelEdit() { document.getElementById('form-edit-id').value = ''; document.getElementById('form-question').value = ''; document.getElementById('form-options').value = ''; document.getElementById('form-correct-opt').value = ''; document.getElementById('form-answer').value = ''; document.getElementById('submit-btn').innerText = "➕ 发布/更新题目"; document.getElementById('cancel-edit-btn').classList.add('hidden'); }
         function deleteItem(id) { if (confirm("确定删除吗？")) { studyData = studyData.filter(i => i.id !== id); localStorage.setItem(DATA_KEY, JSON.stringify(studyData)); renderData(); } }
